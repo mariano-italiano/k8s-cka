@@ -96,11 +96,11 @@ then
 	fi
  
         echo "[TASK 12] Initialize the cluster"
-	if [[ $# -gt 3 ]]; then
-                systemctl set-environment HTTP_PROXY=$4
-                systemctl set-environment HTTPS_PROXY=$4
-                systemctl restart containerd.service
-        fi
+	#if [[ $# -gt 3 ]]; then
+        #        systemctl set-environment HTTP_PROXY=$4
+        #        systemctl set-environment HTTPS_PROXY=$4
+        #        systemctl restart containerd.service
+        #fi
 
         kubeadm init --pod-network-cidr 192.168.0.0/16 >/dev/null 2>&1
 
