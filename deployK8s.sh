@@ -141,7 +141,7 @@ then
                 echo "NO_PROXY=10.96.0.0/12,192.168.0.0/16,172.22.48.212" >> /etc/environment
                 sed -i '/\[Service\]/aEnvironment="HTTP_PROXY='"$4"'"' /lib/systemd/system/containerd.service
                 sed -i '/\[Service\]/aEnvironment="HTTPS_PROXY='"$4"'"' /lib/systemd/system/containerd.service
-                sed -i '/\[Service\]/aEnvironment="NO_PROXY="10.96.0.0/12,192.168.0.0/16,172.22.48.212"' /lib/systemd/system/containerd                                                                            .service
+                sed -i '/\[Service\]/aEnvironment="NO_PROXY="10.96.0.0/12,192.168.0.0/16,172.22.48.212"' /lib/systemd/system/containerd.service
                 systemctl daemon-reload
                 systemctl restart containerd.service
 	fi
