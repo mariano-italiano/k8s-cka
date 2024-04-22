@@ -82,7 +82,19 @@ apt-mark hold kubelet kubeadm kubectl >/dev/null 2>&1
 
 if [[ $(hostname) =~ .*master.* ]]
 then
-
+	if [[ $# -gt 3 ]]; then
+                echo "HTTP_PROXY=$4" >> /etc/environment
+                echo "HTTPS_PROXY=$4" >> /etc/environment
+                echo "http_proxy=$4" >> /etc/environment
+                echo "https_proxy=$4" >> /etc/environment
+                echo "NO_PROXY=10.96.0.0/12,192.168.0.0/16,172.22.48.212" >> /etc/environment
+                sed -i '/\[Service\]/aEnvironment="HTTP_PROXY='"$4"'"' /lib/systemd/system/containerd.service
+                sed -i '/\[Service\]/aEnvironment="HTTPS_PROXY='"$4"'"' /lib/systemd/system/containerd.service
+                sed -i '/\[Service\]/aEnvironment="NO_PROXY="10.96.0.0/12,192.168.0.0/16,172.22.48.212"' /lib/systemd/system/containerd                                                                            .service
+                systemctl daemon-reload
+                systemctl restart containerd.service
+	fi
+ 
         echo "[TASK 12] Initialize the cluster"
 	if [[ $# -gt 3 ]]; then
                 systemctl set-environment HTTP_PROXY=$4
@@ -121,6 +133,18 @@ fi
 
 if [[ $(hostname) =~ .*worker.* ]]
 then
+	if [[ $# -gt 3 ]]; then
+                echo "HTTP_PROXY=$4" >> /etc/environment
+                echo "HTTPS_PROXY=$4" >> /etc/environment
+                echo "http_proxy=$4" >> /etc/environment
+                echo "https_proxy=$4" >> /etc/environment
+                echo "NO_PROXY=10.96.0.0/12,192.168.0.0/16,172.22.48.212" >> /etc/environment
+                sed -i '/\[Service\]/aEnvironment="HTTP_PROXY='"$4"'"' /lib/systemd/system/containerd.service
+                sed -i '/\[Service\]/aEnvironment="HTTPS_PROXY='"$4"'"' /lib/systemd/system/containerd.service
+                sed -i '/\[Service\]/aEnvironment="NO_PROXY="10.96.0.0/12,192.168.0.0/16,172.22.48.212"' /lib/systemd/system/containerd                                                                            .service
+                systemctl daemon-reload
+                systemctl restart containerd.service
+	fi
         echo "[TASK 12] Join node to Kubernetes cluster"
         echo ""
         echo "Please execute following command to get join command and then execute it manually on all worker nodes"
