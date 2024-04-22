@@ -109,7 +109,7 @@ then
       	#	curl -fsSL https://github.com/antrea-io/antrea/releases/download/v1.15.1/antrea.yml | sudo tee antrea.yml
       	#fi
 	
-  	kubectl apply -f antrea.yml
+  	#kubectl apply -f antrea.yml
 
         #echo "[TASK 14] Install Calico networking"
 	#su -c 'kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml' student >/dev/null 2>&1
