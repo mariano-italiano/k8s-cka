@@ -53,7 +53,7 @@ systemctl restart containerd >/dev/null 2>&1
 
 echo "[TASK 6] Disable SWAP"
 swapoff -a >/dev/null 2>&1
-sed -i 's/.* none.* swap.* sw.*/#&/' /etc/fstab >/dev/null 2>&1
+sed -i 's/.* none.* swap.* sw.*/#&/g' /etc/fstab >/dev/null 2>&1
 
 echo "[TASK 7] Install depencdency packages"
 apt-get update >/dev/null 2>&1
