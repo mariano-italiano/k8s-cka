@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-volume-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-volume-nginx
+  template:
+    metadata:
+      labels:
+        app: test-volume-nginx
+    spec:
+      volumes:
+      - name: pvc-volume
+        persistentVolumeClaim:
+          claimName: test-pvc
+      containers:
+      - name: test-volume-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: pvc-volume

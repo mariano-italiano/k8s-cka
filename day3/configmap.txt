@@ -1,0 +1,4 @@
+# this is file for configmap for K8s
+attribute1=testuser
+attribute2=hash
+line=7
