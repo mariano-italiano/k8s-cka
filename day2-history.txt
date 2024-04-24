@@ -1,0 +1,371 @@
+hostnamectl set-hostname k8s-master
+df -h
+sudo poweroff
+sudo -i
+apt-get update -y vim
+apt-get install -y vim
+sudo -i
+kubectl get nodes
+cilium install --version 1.14.4
+kubectl get nodes
+kubectl get pods -n kube-system
+sudo apt-get install bash-completion -y
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+kubeadm token create --print-join-command
+kubectl get nodes
+sudo poweroff
+kubectl get nodes
+vi windows.yaml
+kubectl apply -f windows.yaml
+kubectl get deploy -o wide
+alias now="--grace-period=0 --force"
+kubectl delete deployments.apps $now
+kubectl delete deployments.apps win-webserver $now
+kubeadm version
+kubectl version
+kubelet --version
+apt madison kubeadm
+sudo apt madison kubeadm
+sudo apt-cache  madison kubeadm
+sudo apt show -a kubeadm
+sudo apt show kubeadm | grep 1.29
+sudo apt show kubeadm | grep 1.27
+sudo apt show -a kubeadm | grep kubeadm
+sudo apt show -a kubeadm | grep 1.27
+sudo apt show -a kubeadm | grep 1.29
+sudo apt show --help
+sudo apt show -h
+dpkg -l kubeadm
+dpkg -l kubectl
+dpkg -S kubectl
+kubectl token list
+kubeadm token list
+kubeadm token create --print-join-command
+kubeadm token list
+kubeadm token --help
+kubeadm token list --help
+kubeadm token list fiz5aq.pkdu80eb3ktxbmjy
+kubeadm token list
+kubeadm token fiz5aq.pkdu80eb3ktxbmjy
+kubeadm token 
+sleep -h
+sleep --help
+sudo apt-cache madison kubeadm
+sudo apt-cache madison kubeadm | tail
+sudo apt-cache madison kubeadm | head
+sudo echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo apt-cache madison kubeadm | head
+sudo apt-get update
+sudo apt-cache madison kubeadm | head
+sudo -i
+sudo kubeadm upgrade plan
+sudo echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo apt-get update
+sudo apt-cache madison kubeadm | head
+sudo apt-get install kubeadm=1.28.7-1.1
+sudo kubeadm upgrade plan
+sudo kubeadm upgrade apply v1.28.7
+kubectl get nodes
+kubectl drain k8s-master --ignore-daemonsets 
+sudo apt-get install -y kubelet=1.28.7-1.1 kubectl=1.28.7-1.1
+sudo apt-get install -y kubelet=1.28.7-1.1 kubectl=1.28.7-1.1 --allow-change-held-packages
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+kubectl uncordon k8s-master 
+kubectl get nodes
+sudo echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo apt-get update 
+sudo apt-cache madison kubeadm | head
+sudo apt-get install kubeadm=1.29.2-1.1
+sudo kubeadm upgrade plan
+sudo kubeadm upgrade apply v1.29.2
+kubectl drain k8s-master 
+kubectl drain k8s-master  --ignore-daemonsets 
+sudo apt-get install kubectl=1.29.2-1.1 kubelet=1.29.2-1.1
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+kubectl uncordon k8s-master 
+kubectl get nodes
+ssh worker01
+ssh student@192.168.1.
+kubectl get nodes -o wide
+ssh 192.168.1.110
+kubectl get nodes -o wide
+ssh 192.168.1.110
+kubectl drain worker01 --ignore-daemonsets 
+ssh 192.168.1.110
+kubectl get nodes -o wide
+kubectl uncordon worker01
+kubectl drain worker02 --ignore-daemonsets 
+ssh 192.168.1.120
+kubectl get nodes -o wide
+kubectl get nodes
+kubectl uncordon worker02
+kubectl get pods -A
+k get nodes
+kubectl get nodes
+cd
+kubectl get all -A
+kubectl get nodes
+kubectl get all -A
+sudo apt-get update
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+sudo apt-get update
+sudo apt-cache madison kubeadm
+sudo apt-get install -y --allow-change-held-packages kubeadm=1.30.0-1.1
+sudo kill -9 5089 ; sudo apt-get install -y --allow-change-held-packages kubeadm=1.30.0-1.1
+kubeadm version
+kubectl get nodes -o wide
+kubectl drain worker01
+kubectl drain worker01 --ignore-daemonsets
+kubectl get nodes 
+kubectl get nodes -o wide
+kubectl get pod -n kube-system
+kubectl get pod -n kube-system -o wide
+kubectl get nodes 
+sudo kubeadm upgrade plan v1.30.0
+sudo kubeadm upgrade apply v1.30.0
+kubectl get nodes
+sudo apt-get install -y --allow-change-held-packages kubectl=1.30.0-1.1 kubelet=1.30.0-1.1
+sudo systemctl daemon-reload 
+sudo systemctl restart kubelet
+kubectl get nodes
+cd
+kubectl api-resources 
+kubectl api-resources | gre -i networkpolicy
+kubectl api-resources | grep -i networkpolicy
+vi my-pod.yaml
+kubectl apply -f my-pod.yaml
+kubectl get namespaces 
+kubectl get ns
+kubectl get pod --all-namespaces 
+kubectl get pod -A
+kubectl delete -f my-pod.yaml 
+kubectl get pod -A
+kubectl create ns web
+kubectl apply -f my-pod.yaml -n web
+kubectl get pod
+kubectl get pod -n web
+kubectl get pod -n web -o wide
+curl http://10.0.2.200 
+kubectl delete -n web po nginx 
+kubectl apply -f my-pod.yaml -n web
+kubectl get pod -n web -o wide
+kubectl describe pod nginx -n web
+kubectl describe ns web
+kubectl run httpd --image=httpd 
+kubectl describe pod httpd 
+kubectl get pod httpd 
+kubectl get pod httpd -o yaml
+kubectl run httpd --image=httpd --dry-run=client -o yaml
+kubectl run httpd --image=httpd --labels kubernetes.io/app=httpd --dry-run=client -o yaml
+kubectl run httpd --image=httpd --labels kubernetes.io/app=httpd --dry-run=client -o yaml > httpd.yaml
+vi httpd.yaml
+kubectl apply -f httpd.yaml
+kubectl delete pod httpd
+kubectl apply -f httpd.yaml
+kubectl describe pod httpd
+kubectl edit pod httpd
+kubectl describe pod httpd | grep -A2 labels
+kubectl describe pod httpd | grep -A2 label
+kubectl describe pod httpd | grep -A2 -i label
+vi httpd.yaml 
+kubectl apply -f httpd.yaml
+kubectl describe pod httpd | grep -A2 -i label
+kubectl edit pod httpd
+kubectl describe pod httpd | grep -A2 -i label
+kubectl describe pod httpd | grep -A2 -i name
+kubectl get pod
+vi .kube/config 
+grep client-cert .kube/config  | cut -d " " -f 6
+export client=$(grep client-cert .kube/config  | cut -d " " -f 6)
+echo $client 
+grep client-key .kube/config | cut -d " " -f 6
+export key=$(grep client-key .kube/config | cut -d " " -f 6)
+export key=$(grep certificate-authority .kube/config | cut -d " " -f 6)
+export key=$(grep client-key .kube/config | cut -d " " -f 6)
+export auth=$(grep certificate-authority .kube/config | cut -d " " -f 6)
+echo $autH
+echo $auth
+echo $client | base64 -d > client.pem
+vi client.pem
+echo $key | base64 -d > key.pem
+echo $auth | base64 -d > ca.pem
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/nodes
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/nodes
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/nodes | jq -r '.items[].metadata.name'
+sudo apt  install jq
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/nodes | jq -r '.items[].metadata.name'
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/nodes | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+curl -s --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/nodes | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/namespaces
+curl --cert client.pem --key key.pem --cacert ca.pem https://k8s-master:6443/api/v1/namespaces | jq -r '.items[].metadata.name'
+kubectl get nodes -o json
+kubectl config get-contexts 
+kubectl config current-context 
+kubectl config 
+kubectl config use-context kubernetes-admin@kubernetes
+vi sidecar.yaml
+kubectl apply -f sidecar.yaml
+kubectl get pods
+kubectl exec -it httpd -- bash
+kubectl get pods
+kubectl get pods -o wide
+kubectl exec -it sidecar-pod -- bash
+kubectl exec -it sidecar-pod -- sh
+kubectl exec -it sidecar-pod -- /bin/bash
+kubectl exec -it sidecar-pod -- /bin/sh
+kubectl exec -it sidecar-pod -c sidecar -- /bin/sh
+kubectl logs sidecar-pod 
+kubectl logs sidecar-pod -c sidecar.yaml 
+kubectl logs sidecar-pod -c sidecar
+kubectl logs sidecar-pod -c sidecar -f
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml 
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl exec -it init-pod -- bash
+kubectl exec -it init-pod -c deplay -- bash
+kubectl exec -it init-pod -c deplay -- sh
+kubectl exec -it init-pod -c delay -- sh
+vi test-deploy.yaml
+tail --help
+kubectl apply -f test-deploy.yaml 
+kubectl get pod
+watch -n1 kubectl get pod
+kubectl exec -it myapp-6f97c6d9d6-4gpmf -- bash
+kubectl exec -it myapp-6f97c6d9d6-4gpmf -- sh
+kubectl exec -it myapp-6f97c6d9d6-4gpmf -c logshipper -- sh
+kubectl delete deployments.apps myapp 
+watch -n1 kubectl get pod
+vi test-deploy.yaml 
+kubectl apply -f test-deploy.yaml 
+watch -n1 kubectl get pod
+tail --help
+watch -n1 kubectl get pod
+kubectl logs myapp-76b78ccf6b-wqmdm 
+kubectl events
+watch -n1 kubectl get pod
+kubectl delete deploy myapp 
+tail -F testowy
+echo $?
+tail -F testowy
+echo $?
+tail -F testowy
+echo $?
+tail -f /testowy2
+tail -f testowy2
+echo $?
+ls -la *yml
+ls -la *.yaml
+vi web.yaml
+vi web-svc.yaml
+vi web.yaml
+vi web-svc.yaml
+vi web.yaml
+kubectl apply -f web.yaml 
+watch -n1 kubectl get pod
+kubectl logs web 
+kubectl logs web -c svc-check
+kubectl logs web 
+watch -n1 kubectl get pod
+kubectl delete pod my-static-pod-worker01 
+watch -n1 kubectl get pod
+kubectl get pod
+kubectl get pod web | grep -i Anno
+kubectl describe pod web | grep -i Anno
+kubectl annotate pod --help
+kubectl annotate pod web description="My test web server for GRE environmen"
+kubectl describe pod web | grep -i Anno
+kubectl annotate pod web env=dev
+kubectl describe pod web | grep -i Anno
+kubectl describe pod web | grep -i Anno -A 3
+kubectl describe pod web | grep -i Anno -A 2
+kubectl describe pod web | grep -i Anno -A 1
+kubectl annotate pod web env=prod
+kubectl annotate pod web env=prod --overwrite 
+kubectl describe pod web | grep -i Anno -A 1
+kubectl annotate pod web description-
+kubectl describe pod web | grep -i Anno -A 1
+kubectl annotate pod web desc-ription="test description"
+kubectl describe pod web | grep -i Anno -A 1
+kubectl annotate pod web desc-="test 2 asdas da s"
+kubectl describe pod web | grep -i labels -A2
+kubectl get pods
+kubectl describe pod httpd| grep -i labels -A2
+kubectl edit pod web 
+kubectl describe pod httpd| grep -i labels -A2
+kubectl describe pod web | grep -i labels -A2
+kubectl get pod -h
+kubectl get pod -l kubernetes.io/app=web
+kubectl get pod -l 'kubernetes.io/app in(web,httpd)'
+kubectl describe pod web | grep -i labels -A2
+kubectl describe pod httpd| grep -i labels -A2
+kubectl get pod -l 'kubernetes.io/app in(web,httpd),kubernetes.io/env notin(dev)'
+kubectl get pod -l kubernetes.io/app=httpd,kubernetes.io/env=dev
+kubectl get pod -l kubernetes.io/app=httpd,kubernetes.io/env=prod
+kubectl get pod -l kubernetes.io/app!=httpd
+kubectl get pod -l kubernetes.io/app!=web
+git clone https://github.com/mariano-italiano/k8s-cka.git
+sudo apt-get install git
+git clone https://github.com/mariano-italiano/k8s-cka.git
+cd k8s-cka/
+mkdir day2
+mv ../*.yaml day2/
+git status
+git add .
+git config --global credential.helper store
+git commit -m "Adding YAML files"
+git config --global user.email  "mariano-italiano"
+git commit -m "Adding YAML files"
+git push
+cd
+cd k8s-cka/day2/
+kubectl get pods -A -l app=web
+history
+history | awk '$1 > 0' | cut -c 8- > ../day2-history.txt
+kubectl get pods -A -l app=web
+history
+history | awk '$1 > 0' | cut -c 8- > ../day2-history.txt
+vi ../day2-history.txt
+kubectl get pod
+kubectl create deploy test1 --image nginx --replicas=2
+kubectl get pod
+vi web-svc.yaml 
+vi pod1.yaml
+kubectl apply -f pod1.yaml
+kubectl get pod -o wide
+vi pod1-svc.yaml
+kubectl apply -f pod1-svc.yaml
+kubectl get service
+kubectl get svc,ep
+kubectl describe pod web | grep -i label -A2
+kubectl describe svc web-svc | grep -i label -A2
+kubectl edit svc web-svc
+kubectl get svc,ep
+kubectl get svc,ep,pod
+kubectl get svc,ep,pod -o wide
+kubectl exec -it pod1 -- bash
+kubectl get svc,ep,pod -o wide
+kubectl expose pod pod1 --name pod-np-svc --type NodePort --nodePort 30080
+kubectl expose pod pod1 --name pod-np-svc --type NodePort 
+kubectl expose pod pod1 --name pod-np-svc --type NodePort --port 30080
+kubectl get svc pod-np-svc -o yaml
+kubectl edit svc pod-np-svc 
+kubectl get svc,ep,pod -o wide
+kubectl expose pod pod1 --name pod-lb-svc --port 80 --type LoadBalancer
+kubectl get svc pod-lb-svc 
+kubectl edit svc pod-lb-svc 
+kubectl get svc pod-lb-svc 
+kubectl edit svc pod-lb-svc 
+kubectl get svc pod-lb-svc 
+git status
+history
+history | awk '$1 > 330' | cut -c 8- >> ../day2-history.txt
