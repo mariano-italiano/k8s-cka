@@ -1,0 +1,18 @@
+apiVersion: v1
+clusters:
+- cluster:
+    insecure-skip-tls-verify: true
+    server: https://192.168.1.100:6443
+  name: szkolenie
+contexts:
+- context:
+    cluster: szkolenie
+    user: szkolenie
+  name: sa-context
+current-context: "sa-context"
+kind: Config
+preferences: {}
+users:
+- name: szkolenie
+  user:
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6InVTUlVISUFablF5VC1yb1NMRHhhNHhjaThfYi1YQlluUk51bzNaeG9PUFkifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNzE0MDQ0NjA2LCJpYXQiOjE3MTQwNDEwMDYsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiNTljMGUyZTEtZWRiNC00NzYwLWI3NjMtNWI4YmVkZDkyOTkzIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6InN6a29sZW5pZSIsInVpZCI6IjRmOWZiNmM0LThlMDYtNDg0Yy05NDA0LWE4YzNmOWNkOTMxMSJ9fSwibmJmIjoxNzE0MDQxMDA2LCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpzemtvbGVuaWUifQ.Ia4HbkXIYHmBNoUNY_UkwnQ2xrWn2-y2VCurjxVO8jt6HayFELsJFBDURGgBLayGh0hoXqVhiG_EuCNTiDCPobNWEgamL0_zIryaacS9TA961GAEg1Fmd7qwA9TdF0O_tktMrhURTPsi-2YmoByoROqbT4uS9L_G9v7KUJABuosMDNFN4T_2Wp9XwHLz0z6D6pRyUBRfP050NBNONBwENfh77CsieBGVS1E5twvTrJmeEqkPpd8eS5I6FwVxJE28GGLHFYp9o14vG5Y4Ekuw7oE8AEyHC83jcndh0gC5bUQzU7aYMVxr159ovJr5udRBhVKfTiXDsIV_K2TocdnvxA

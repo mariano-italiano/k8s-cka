@@ -1,0 +1,350 @@
+vi nodename-pod.yaml
+kubectl get pods -o wide
+kubectl get ndoes
+kubectl get nodes
+kubectl uncordon worker01
+kubectl get pods -o wide
+kubectl get nodes
+vi nodename-pod.yaml
+kubectl apply -f nodename-pod.yaml
+kubectl get pods -o wide
+vi nodename-pod.yaml
+kubectl replace --force -f nodename-pod.yaml
+kubectl get pods -o wide
+kubectl get nodes --show-labels
+kubectl label nodes worker02 kubernetes.io/web-services=true
+kubectl get nodes --show-labels
+cp -rp nodename-pod.yaml nodeselector-pod.yaml
+vi nodeselector-pod.yaml
+kubectl apply -f nodeselector-pod.yaml
+kubectl get pods -o wide
+kubectl run tests-nginx-schedule --image nginx
+kubectl get pods -o wide
+vi ../day3/deployment.yaml 
+vi schedule-deployment.yaml
+kubectl apply -f schedule-deployment.yaml
+vi schedule-deployment.yaml
+kubectl get pods -o wide
+kubectl label nodes worker02 web-services-
+kubectl label nodes worker02 kubernetes.io/web-services-
+kubectl replace --force -f nodeselector-pod.yaml 
+kubectl get pods -o wide
+kubectl events
+kubectl logs nodeselector-pod
+kubectl label nodes worker02 kubernetes.io/web-services=true
+kubectl events -w
+kubectl get pods -o wide
+kubectl describe nodes
+kubectl taint --help
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl get nodes
+kubectl get nodes | tail -1
+kubectl get nodes | tail -3
+kubectl get nodes | tail -3 | awk '{print $1 }'
+kubectl describe nodes k8s-master | grep Taints
+kubectl describe nodes k8s-master | grep -e Taints -e Name
+kubectl describe nodes k8s-master | grep -e Taints: -e Name:
+for i in `kubectl get nodes | tail -3 | awk '{print $1 }'`; do kubectl describe nodes $i | grep -e Taints: -e Name:; done
+for i in `kubectl get nodes | tail -3 | awk '{print $1 }'`; do kubectl describe nodes $i | grep -e Taints: -e Name:; echo "-----------------------------"; done
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint node worker01 env=prod:NoSchedule
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl get pods
+kubectl get pods -o wide
+kubectl delete pod tests-nginx-schedule
+kubectl run tests-nginx-schedule --image nginx
+kubectl get pods -o wide
+kubectl get pod tests-nginx-schedule -o yaml > test-pod.yaml
+vi test-pod.yaml
+rm test-pod.yaml
+kubectl run tests-nginx-schedule --image nginx --dry-run=client -o yaml > tests-nginx-schedule.yaml
+vi tests-nginx-schedule.yaml
+kubectl apply -f tests-nginx-schedule.yaml
+vi tests-nginx-schedule.yaml
+kubectl apply -f tests-nginx-schedule.yaml
+kubectl get pods -o wide
+kubectl replace --force -f tests-nginx-schedule.yaml
+kubectl get pods -o wide
+kubectl taint node worker01 location=pl:NoExecute
+kubectl get pods -o wide
+kubectl events
+kubectl taint node worker01 location=pl-
+kubectl taint node worker01 location-
+vi tests-nginx-schedule.yaml
+kubectl apply -f tests-nginx-schedule.yaml
+kubectl get pods -o wide
+kubectl taint node worker01 location=pl:NoExecute
+kubectl get pods -o wide
+kubectl get events
+kubectl get pods -o wide
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint node worker01 location-
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint node worker01 env-
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+vi affinity-pod.yaml
+kubectl get nodes --show-labels 
+kubectl label nodes worker01 country=poland
+kubectl label nodes worker01 env=prod
+kubectl label nodes worker02 country=france
+vi affinity-pod.yaml
+kubectl apply -f affinity-pod.yaml
+kubectl get pods -o wide
+kubectl label nodes worker01 env-
+kubectl replace --force  -f affinity-pod.yaml
+kubectl get pods -o wide
+kubectl label nodes worker02 env=prod
+kubectl replace --force  -f affinity-pod.yaml
+kubectl get pods -o wide
+kubectl label nodes worker02 country-
+kubectl label nodes worker01 country-
+kubectl replace --force  -f affinity-pod.yaml
+kubectl get pods -o wide
+kubectl label nodes worker01 country
+kubectl label nodes worker01 country=poland
+kubectl get pods -o wide
+vi affinity-pod.yaml
+kubectl replace --force  -f affinity-pod.yaml
+kubectl get pods -o wide
+kubectl delete pod affinity-pod 
+kubectl get pods -o wide
+kubectl get nodes --show-labels 
+kubectl label nodes worker01 country=poland
+kubectl label nodes worker02 country=france
+kubectl edit pod affinity-node-pod 
+kubectl get pods --show-labels 
+vi affinity-pod-pod.yaml
+kubectl apply -f affinity-pod-pod.yaml
+kubectl get pods --show-labels 
+kubectl get pods -o wide
+vi affinity-pod-pod.yaml
+kubectl replace --force -f affinity-pod-pod.yaml
+kubectl get pods -o wide
+openssl genrsa -out devops.key
+openssl req -new -key devops.key -out devops.csr -subj "/CN=devops"
+cat devops.csr | base64 | tr -d '\n'
+vi user-request-devops.yaml
+kubectl apply -f user-request-devops.yaml 
+kubectl certificate -h
+kubectl describe certificatesigningrequests.certificates.k8s.io user-request-devops 
+kubectl get csr
+kubectl certificate approve user-request-devops
+kubectl get csr
+kubectl get csr user-request-devops -o jsonpath='{.status.certificate}'
+kubectl get csr user-request-devops -o jsonpath='{.status.certificate}' | base64 -d > devops-user.crt
+vi devops-user.crt
+kubectl --kubeconfig config-devops config set-cluster szkolenie --server=https://192.168.1.100:6443 --insecure-skip-tls-verify=true
+vi config-devops 
+kubectl --kubeconfig config-devops config set-credentials devops --client-certificate devops-user.crt --client-key devops.key --embed-certs=true
+vi config-devops 
+kubectl --kubeconfig config-devops config set-context default --cluster szkolenie --user devops
+kubectl --kubeconfig config-devops config use-context default
+ubectl --kubeconfig config-devops config get-context
+kubectl --kubeconfig config-devops config get-context
+kubectl --kubeconfig config-devops config --help
+kubectl --kubeconfig config-devops config get-contexts
+kubectl create ns devops
+kubectl create role devops-role --help
+kubectl create role devops-role --verb=get,list,watch --resource=pods,pods/log -n devops
+kubectl describe role devops -n devops
+kubectl get role devops -n devops -o yaml
+kubectl get role devops -n devops 
+kubectl get role devops-role -n devops -o yaml
+kubectl -n devops create rolebinding --help
+kubectl -n devops create rolebinding --role=devops-role --user=devops 
+kubectl -n devops create rolebinding devops-rolebinding --role=devops-role --user=devops 
+sudo useradd devops
+sudo passwd devops
+sudo -i
+cp config-devops /tmp/
+sudo -i
+vi ~/.kube/config 
+kubectl run test-devops-pod --image nginx -n devops
+kubectl --kubeconfig config-devops get deploy
+kubectl create sa szkolenie
+kubectl get clusterrole
+kubectl create clusterrolebinding --help
+kubectl create clusterrolebinding sa-clulsterrole-binding --clusterrole cluster-admin --serviceaccount=default:szkolenie
+kubectl create token szkolenie 
+export SA_TOKEN=$(kubectl create token szkolenie)
+echo $TOKEN
+echo $SA_TOKEN
+kubectl config --kubeconfig sa-config set-credentials szkolenie --token=$SA_TOKEN
+kubectl --kubeconfig sa-config config set-cluster szkolenie --server=https://192.168.1.100:6443 --insecure-skip-tls-verify=true
+vi sa-config 
+kubectl --kubeconfig sa-config config set-context sa-context --cluster szkolenie --user szkolenie
+vi sa-config 
+kubectl --kubeconfig sa-config -n devops get pods
+kubectl config set-context --current --user szkolenie
+kubectl --kubeconfig sa-config -n devops get pods
+kubectl get -n devops all
+kubectl get -n devops pods
+vi ~/.kube/config
+vi sa-config 
+kubectl --kubeconfig sa-config -n devops get pods
+kubectl --kubeconfig sa-config -n devops create deploy --image nginx --replicas=3
+kubectl --kubeconfig sa-config -n devops create deploy test-deploy-sa --image nginx --replicas=3
+kubectl --kubeconfig sa-config -n devops get pods
+kubectl --kubeconfig config-devops get deploy
+kubectl auth can-i
+kubectl auth can-i --help
+sudo -i
+kubectl auth can-i get pod -as=system:serviceaccount:default:szkolenie
+kubectl auth can-i get pod --as=system:serviceaccount:default:szkolenie
+kubectl auth can-i create sts --as=system:serviceaccount:default:szkolenie
+kubectl auth can-i create secret --as=system:serviceaccount:default:szkolenie
+kubectl get pod
+kubectl get pod -o wide 
+kubectl get pod -o wide -n devops
+kubectl exec -it nginx -- bash
+kubectl exec -it configmap-pod -- bash
+kubectl exec -it configmap-pod -- sh
+kubectl exec -it nginx -- bash
+kubectl edit pod configmap-pod 
+kubectl run test-curl --image radial/busyboxplus:curl 
+kubectl exec -it test-curl -- bash
+kubectl exec -it test-curl -- sh
+kubectl get pods
+kubectl run test-curl --image "radial/busyboxplus:curl"
+kubectl delete pod test-curl 
+kubectl run test-curl --image "radial/busyboxplus:curl"
+kubectl get pods
+kubectl delete pod test-curl 
+kubectl run test-curl --image "radial/busyboxplus:curl" --dry-run=client -o yaml > test-curl.yaml
+vi test-curl.yaml
+kubectl apply -f test-curl.yaml 
+kubectl exec -it test-curl -- sh
+kubectl get pods
+kubectl exec -it test-curl -- sh
+vi test-curl.yaml
+kubectl delete test-curl
+kubectl delete pod test-curl
+kubectl apply -f test-curl.yaml 
+kubectl get pods
+kubectl exec -it test-curl -- bash
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl -n devops get pods --show-labels 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml -n devops
+kubectl exec -it test-curl -- sh
+kubectl get ns --show-labels 
+vi my-networkpolicy.yaml
+kubectl get pod test-curl --show-labels 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml
+kubectl delete -f my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml -n devops 
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml -n devops 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml -n devops 
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml 
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl exec -it test-curl -- sh
+kubectl apply -f my-networkpolicy.yaml 
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml 
+kubectl exec -it test-curl -- sh
+vi test-curl.yaml 
+cp -rp test-curl.yaml test-curl2.yaml
+vi test-curl2.yaml
+kubectl apply -f test-curl2.yaml
+kubectl exec -it test-curl2 -- sh
+vi test-curl2.yaml
+vi my-networkpolicy.yaml 
+kubectl apply -f my-networkpolicy.yaml
+kubectl exec -it test-curl2 -- sh
+vi my-networkpolicy.yaml 
+kubectl apply -f my-networkpolicy.yaml
+kubectl exec -it test-curl2 -- sh
+kubectl exec -it test-curl -- sh
+vi my-networkpolicy.yaml 
+kubectl apply -f my-networkpolicy.yaml
+kubectl exec -it test-curl -- sh
+kubectl exec -it test-curl2 -- sh
+vi my-networkpolicy.yaml 
+sudo journalctl -u containerd
+sudo journalctl -u containerd -p err
+sudo journalctl -u containerd -p warn
+sudo journalctl -u containerd -p war
+sudo journalctl -u containerd --help
+sudo journalctl -u containerd -p err
+sudo journalctl -u containerd
+sudo journalctl -u kubelet
+vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+cd /var/log
+ls -la
+cd pods
+ls -la
+cd ../containers/
+ls -la
+cd ../pods/kube-system_etcd-k8s-master_b35e4de82e257e0eb7683e09fa158f41/
+ls -la
+cd etcd/
+ls -la
+less 5.log 
+sudo less 5.log 
+cd
+kubectl get events -A --sort-by --help
+kubectl get events -A --sort-by '.metadata.creationTimestamp'
+kubectl top 
+kubectl top  node
+wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+vi components.yaml 
+kubectl apply -f components.yaml
+kubectl get pods
+kubectl get pods -n kube-system
+watch -n 1 kubectl get pods -n kube-system
+kubectl top node
+kubectl top pode
+kubectl top pod
+kubectl top pod --sort-by cpu
+kubectl top pod --sort-by memory
+kubectl run pause-pod --image pause:3.1
+kubectl exec -it pause-pod -- sh
+kubectl exec -it pause-pod -- bash
+kubectl debug -it pause-pod --image busybox --target=pause-pod
+kubectl debug -it my-pod --image busybox --target=pause-pod
+kubectl debug -it pause-pod --image=busybox --target=pause-pod
+kubectl get pods
+kubectl run pause-pod --image=registry.k8s.io/pause:3.1
+kubectl delete pod pasue-pod; kubectl run pause-pod --image=registry.k8s.io/pause:3.1
+kubectl delete pod pause-pod; kubectl run pause-pod --image=registry.k8s.io/pause:3.1
+kubectl get pods
+kubectl debug -it pause-pod --image=busybox --target=pause-pod
+sudo crictl ps -a
+kubectl get pods
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+watch -n1 kubectl get all -n kubernetes-dashboard 
+cd k8s-cka/day4/
+cp -rp ../day3/ingress.yaml dashboard-ingress.yaml
+vi dashboard-ingress.yaml
+kubectl get svc kubernetes-dashboard
+kubectl get svc kubernetes-dashboard -n kubernetes-dashboard 
+vi dashboard-ingress.yaml
+kubectl apply -f dashboard-ingress.yaml -n kubernetes-dashboard 
+kubectl get networkpolicies.networking.k8s.io -A
+kubectl delete networkpolicies.networking.k8s.io -n devops my-networkpolicy 
+kubectl edit -n kubernetes-dashboard svc kubernetes-dashboard 
+echo $SA_TOKEN
+kubectl create sa admin-user -n kubernetes-dashboard 
+kubectl get sa -n kubernetes-dashboard 
+kubectl -n kubernetes-dashboard create token kubernetes-dashboard
+kubectl edit sa -n kubernetes-dashboard kubernetes-dashboard 
+kubectl create clusterrolebinding dashboard-binding --help
+kubectl create clusterrolebinding dashboard-binding --clusterrole cluster-admin --serviceaccount=kubernetes-dashboard:kubernetes-dashboard 
+kubectl -n kubernetes-dashboard create token kubernetes-dashboard
+cd ..
+git status
+history
+history | awk '$1 > 839' | cut -c 8- >> day4-history.txt
