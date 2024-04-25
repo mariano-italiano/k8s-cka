@@ -18,3 +18,8 @@ kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.15.1/a
 sudo apt-get install bash-completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 source ~/.bashrc
+
+# INSTALL HELM
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
